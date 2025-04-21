@@ -20,10 +20,6 @@ require('hologram').setup{
   auto_display = true -- WIP automatic markdown image display, may be prone to breaking
 }
 
--- Set up coc extentsions
-vim.g.coc_global_extensions = {"coc-json", "coc-clangd"}
--- Set up coc key mappings
-vim.cmd("inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : \"\\<C-g>u\\<TAB>\"")
 vim.keymap.set("n", "<F5>", ":lua require'dap'.toggle_breakpoint()<CR>")
 vim.keymap.set("n", "<F6>", ":lua require'dap'.continue()<CR>")
 vim.keymap.set("n", "<F7>", ":lua require'dap'.step_over()<CR>")
