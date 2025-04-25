@@ -121,3 +121,20 @@ local cmp = require'cmp'
 
   -- Set up lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- Setup LSP servers
+
+-- C/C++ related LSPs
+vim.lsp.enable('clangd')
+vim.lsp.enable('cmake')
+-- HTML
+vim.lsp.enable('html')
+-- Lua
+vim.lsp.enable('lua_ls.lua')
+-- Python
+vim.lsp.enable('pyright')
+-- Typescript
+vim.lsp.enable('ts_ls')
+-- Vim
+vim.lsp.enable('vimls')
+
