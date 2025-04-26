@@ -5,12 +5,18 @@ return {
   -- version = "*" 
   opts = {
     languages = {
-        python = {
-            template = {
-                annotation_convention = "reST"
-            }
-        },
+      python = {
+        template = {
+          annotation_convention = "reST"
+        }
+      },
     }
-
-  }
+  },
+  keys = {
+    {
+      "<leader>ng",
+      "<cmd>Neogen<cr>",
+      desc = "Telescope Live Grep",
+    },
+  },
 }
