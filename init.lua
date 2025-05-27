@@ -20,12 +20,16 @@ require('hologram').setup{
   auto_display = true -- WIP automatic markdown image display, may be prone to breaking
 }
 
+explorerScript = require("explorerScript")
+
 vim.keymap.set("n", "<F5>", ":lua require'dap'.toggle_breakpoint()<CR>")
 vim.keymap.set("n", "<F6>", ":lua require'dap'.continue()<CR>")
 vim.keymap.set("n", "<F7>", ":lua require'dap'.step_over()<CR>")
 vim.keymap.set("n", "<F8>", ":lua require'dap'.step_into()<CR>")
 
-vim.cmd[[ 
+vim.keymap.set("n", "<leader>ee", ":lua explorerScript.openExplorer() <CR><CR>")
+
+vim.cmd[[
 function! MdpOpenPreview(url) abort
 let l:mdp_browser = '/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
 let l:mdp_browser_opts = '--new-window'
