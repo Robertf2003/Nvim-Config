@@ -45,7 +45,7 @@ if !filereadable(substitute(l:mdp_browser, '\\ ', ' ', 'g'))
 ]]
 
 -- Setup the colorschemes
-vim.cmd("colorscheme citruszest")
+vim.cmd("colorscheme catppuccin")
 
 local cmp = require'cmp'
 
