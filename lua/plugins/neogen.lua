@@ -10,13 +10,33 @@ return {
           annotation_convention = "reST"
         }
       },
+      c = {
+        template = {
+          annotation_convention = "doxygen"
+        }
+      },
+      cpp = {
+        template = {
+          annotation_convention = "doxygen"
+        }
+      },
+      javascript = {
+        template = {
+          annotation_convention = "JSDoc"
+        }
+      },
+      typescript = {
+        template = {
+          annotation_convention = "TSDoc"
+        }
+      },
     }
   },
   keys = {
     {
       "<leader>ng",
       "<cmd>Neogen<cr>",
-      desc = "Telescope Live Grep",
+      desc = "Neogen",
     },
   },
 }
