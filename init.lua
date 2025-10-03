@@ -21,6 +21,8 @@ require('hologram').setup{
 }
 
 explorerScript = require("explorerScript")
+screenTraversalScript = require("screenTraversal")
+screenTraversalScript.setup()
 
 vim.keymap.set("n", "<F5>", ":lua require'dap'.toggle_breakpoint()<CR>")
 vim.keymap.set("n", "<F6>", ":lua require'dap'.continue()<CR>")
