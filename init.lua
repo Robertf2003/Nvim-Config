@@ -146,3 +146,5 @@ vim.lsp.enable('pyright')
 vim.lsp.enable('ts_ls')
 -- Vim
 vim.lsp.enable('vimls')
+-- Golang
+vim.lsp.enable('gopls')
