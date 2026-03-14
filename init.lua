@@ -47,26 +47,15 @@ if !filereadable(substitute(l:mdp_browser, '\\ ', ' ', 'g'))
 ]]
 
 -- Setup the colorschemes
-vim.cmd("colorscheme catppuccin")
+vim.cmd("colorscheme kanagawa")
 
 local cmp = require'cmp'
-
+local luasnip = require("luasnip")
   cmp.setup({
     snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-
-        -- For `mini.snippets` users:
-        -- local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
-        -- insert({ body = args.body }) -- Insert at cursor
-        -- cmp.resubscribe({ "TextChangedI", "TextChangedP" })
-        -- require("cmp.config").set_onetime({ sources = {} })
-      end,
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
     },
     window = {
       completion = cmp.config.window.bordered(),
@@ -78,33 +67,33 @@ local cmp = require'cmp'
       }
     },
     mapping = cmp.mapping.preset.insert({
+      -- Scroll documentation
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
-      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<CR>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+              if luasnip.expandable() then
+                  luasnip.expand()
+              else
+                  cmp.confirm({
+                      select = true,
+                  })
+              end
+          else
+              fallback()
+          end
+      end
+  ), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
+      { name = 'luasnip' },
     }, {
       { name = 'buffer' },
     })
   })
-
-  -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
-  -- Set configuration for specific filetype.
-  --[[ cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'git' },
-    }, {
-      { name = 'buffer' },
-    })
- })
- require("cmp_git").setup() ]]-- 
 
   -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline({ '/', '?' }, {
@@ -128,19 +117,32 @@ local cmp = require'cmp'
   -- Set up lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- Setup LSP servers
 
+vim.keymap.set({"i", "s"}, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, {silent = true})
+
+-- Setup LSP servers
 -- C/C++ related LSPs
 vim.lsp.enable('clangd')
+
+vim.lsp.config.clangd = {
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--query-driver=**/*xtensa-esp32*-elf-g*", -- Matches your ESP-IDF gcc/g++ compiler
+    },
+}
 vim.lsp.enable('cmake')
 -- HTML
 vim.lsp.enable('html')
 -- Lua
-vim.lsp.enable('lua_ls.lua')
+-- vim.lsp.enable('lua_ls.lua')
 -- Python
 vim.lsp.enable('pyright')
 -- Typescript
 vim.lsp.enable('ts_ls')
 -- Vim
 vim.lsp.enable('vimls')
-
