@@ -12,6 +12,20 @@ return {
                 desc = "Switch between header and source file",
             },
         },
+        opts = {
+            servers = {
+                gopls = {
+                    settings = {
+                        gopls = {
+                            analyses = {
+                                unusedparams = true,
+                            },
+                            staticcheck = true,
+                        },
+                    },
+                },
+            }
+        },
         config = function()
             vim.lsp.config('clangd', {
                 capabilities = capabilities,
@@ -19,7 +33,6 @@ return {
                     "clangd",
                     "--background-index",
                     "--clang-tidy",
-                    "--query-driver=**/*xtensa-esp32*-elf-g*",
                 }
             })
         end,
