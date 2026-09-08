@@ -127,14 +127,6 @@ end, {silent = true})
 -- Setup LSP servers
 -- C/C++ related LSPs
 vim.lsp.enable('clangd')
-
-vim.lsp.config.clangd = {
-    cmd = {
-        "clangd",
-        "--background-index",
-        "--query-driver=**/*xtensa-esp32*-elf-g*", -- Matches your ESP-IDF gcc/g++ compiler
-    },
-}
 vim.lsp.enable('cmake')
 -- HTML
 vim.lsp.enable('html')
