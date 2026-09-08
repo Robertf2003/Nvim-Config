@@ -124,6 +124,11 @@ vim.keymap.set({"i", "s"}, "<C-E>", function()
 	end
 end, {silent = true})
 
+-- LSP settings
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Hover documentation" })
+vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, { desc = "Workspace symbol search" })
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename symbol" })
 -- Setup LSP servers
 -- C/C++ related LSPs
 vim.lsp.enable('clangd')
