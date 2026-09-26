@@ -6,13 +6,18 @@ return {
     keys = {
       {
         "<leader>fb",
-        "<cmd>Telescope buffers<cr>",
-        desc = "See Telescope buffers",
+        "<cmd>Telescope builtin<cr>",
+        desc = "See Telescope builtins",
       },
       {
         "<leader>ff",
         "<cmd>Telescope find_files<cr>",
         desc = "Use Telescope to find files by name",
+      },
+      {
+        "<leader>fF",
+        "<cmd>Telescope git_files<cr>",
+        desc = "Use Telescope to find files tracked by git",
       },
       {
         "<leader>fg",
