@@ -5,6 +5,11 @@ return {
     'nvim-tree/nvim-web-devicons'},
     keys = {
       {
+        "<leader>fb",
+        "<cmd>Telescope buffers<cr>",
+        desc = "See Telescope buffers",
+      },
+      {
         "<leader>ff",
         "<cmd>Telescope find_files<cr>",
         desc = "Use Telescope to find files by name",
@@ -13,11 +18,6 @@ return {
         "<leader>fg",
         "<cmd>Telescope live_grep<cr>",
         desc = "Use Telescope to grep for something in files",
-      },
-      {
-        "<leader>fb",
-        "<cmd>Telescope buffers<cr>",
-        desc = "See Telescope buffers",
       },
       {
         "<leader>fh",
